@@ -3,16 +3,18 @@ const cors = require('cors');
 
 // Import routers
 const healthCheckRouter = require('../routes/healthcheck');
+const shortenerRouter = require('../routes/shortener')
 
 const router = express.Router();
 // Define routes
-router.use("/api/healthcheck", healthCheckRouter)
+router.use("/healthcheck", healthCheckRouter)
+router.use("/shortener", shortenerRouter )
 
 const app = express();
 app.use(express.json())
     .use(cors())
     .use(express.urlencoded({extended: false}))
-    .use(router)
+    .use("/api", router)
 
 module.exports = app
     

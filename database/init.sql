@@ -1,0 +1,6 @@
+DROP TABLE IF EXISTS url_mapping CASCADE;
+
+CREATE TABLE url_mapping (
+    url_from VARCHAR(255) PRIMARY KEY,
+    url_to VARCHAR(255) NOT NULL UNIQUE
+);

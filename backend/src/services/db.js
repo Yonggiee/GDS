@@ -7,10 +7,13 @@ const pool = new Pool({
   port: 5432,
 })
 
-async function init() {
+async function initDb() {
   console.log("Connecting to postgres DB...");
   await pool.connect();
   console.log("Successfully connected to postgres DB");
 }
 
-module.exports.init = init;
+module.exports = {
+    initDb,
+    pool
+}
