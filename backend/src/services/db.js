@@ -1,10 +1,10 @@
 const { Pool } = require('pg')
 const pool = new Pool({
-  user: 'tester',
-  host: 'db',
-  database: 'GDS',
-  password: 'password1',
-  port: 5432,
+  user: process.env.USER,
+  host: process.env.HOST,
+  database: process.env.DATABASE,
+  password: process.env.PASSWORD,
+  port: process.env.PORT
 })
 
 async function initDb() {
@@ -14,6 +14,6 @@ async function initDb() {
 }
 
 module.exports = {
-    initDb,
-    pool
+  initDb,
+  pool
 }
