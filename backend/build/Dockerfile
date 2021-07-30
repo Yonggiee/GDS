@@ -5,7 +5,7 @@ FROM node:lts-alpine
 WORKDIR /app
 
 # Copy files to container
-COPY src/ .
+COPY . .
 
 # Install dependencies
 RUN yarn
