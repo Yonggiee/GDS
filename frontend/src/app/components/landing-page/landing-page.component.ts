@@ -27,6 +27,7 @@ export class LandingPageComponent implements OnInit {
 
   onSubmit(): void {
     let url = this.urlForm.controls["url"].value;
+    this.urlForm.reset();
     if (this.mode == Mode.SHORTEN) {
       this.shortenerService.postShortenUrl(url).subscribe((res) => {
         this.results = res["url_to"];
