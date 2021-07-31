@@ -1,0 +1,143 @@
+/* Commons */
+.center {
+    text-align: center;
+}
+
+.blue-background {
+    background-color: #435B81;
+}
+
+.space {
+    margin: 0% 1%;
+}
+
+.align-left {
+    text-align: left;
+}
+
+.button {
+  color: white;
+  height: 50px;
+  width: 25%;
+  margin-left: 2%;
+  font-size: medium;
+
+  background: linear-gradient(90deg, #FDCF0F 0%, rgba(253, 207, 15, 0.921875) 0.01%, #FB3F00 100%);
+  border-radius: 10px;
+}
+
+/* Query container */
+.query-container {
+    color: white;
+    font-weight: bold;
+    margin: 7% 20% 0% 20%;
+    padding: 1% 2% 2% 2%;
+    font-size: large;
+}
+
+.bottom-left-tip-curve {
+    border-radius: 15px;
+}
+
+.bottom-left-tip-edge {
+    border-radius: 15px 15px 15px 0px;
+}
+
+/* Form */
+.form {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.input {
+  font-size: medium;
+  border-radius: 5px;
+  height: 40px;
+  width: 70%;
+  border-color: transparent;
+}
+
+/* Tabs */
+.tabs {
+    margin: 0% 20%;
+    color: white;
+    font-weight: bold;
+}
+
+.tab {
+    border-radius: 0px 0px 15px 15px;
+    padding: 1% 2%;
+    display:inline-block;
+    vertical-align:top;
+}
+
+/* Result container */
+.result-container {
+  color: black;
+  background-color: #ffffff;
+  font-weight: bold;
+  margin: 5% 20% 0% 20%;
+  padding: 1% 2% 3% 2%;
+  font-size: large;
+  border-radius: 15px;
+}
+
+.result {
+    margin: 0% 10%;
+    overflow: auto;
+}
+
+.result-value {
+  font-weight: normal;
+  display:inline-block;
+}
+
+.result-button {
+  border-color: transparent;
+  display:inline-block;
+  float: right;
+}
+
+@media only screen and (max-width: 760px) {
+    /* Commons */
+    .button {
+        margin-top: 15px;
+        height: 40px;
+        width: 100%;
+        margin-left: 0px;
+    }
+
+    /* Query container */
+    .query-container {
+        margin: 20% 10% 0% 10%;
+        padding: 2% 6%;
+    }
+
+    .length-chosen {
+        border-radius: 15px 15px 0px 15px;
+    }
+
+    /* Form */
+    .input {
+      width: 98%;
+    }
+
+    /* Tabs */
+    .tabs {
+      margin: 0% 10%;
+      width: 98%;
+    }
+
+    .tab {
+      padding-top: 1%;
+      padding-bottom: 1%;
+      width: 37%;
+      text-align: center;
+    }
+
+    /* Result container */
+    .result-container {
+      margin: 5% 10% 0% 10%;
+      padding: 2% 6% 5% 6%;
+    }
+}
