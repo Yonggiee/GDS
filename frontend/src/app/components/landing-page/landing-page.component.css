@@ -21,7 +21,7 @@
   width: 25%;
   margin-left: 2%;
   font-size: medium;
-
+  border: 0px;
   background: linear-gradient(90deg, #FDCF0F 0%, rgba(253, 207, 15, 0.921875) 0.01%, #FB3F00 100%);
   border-radius: 10px;
 }
