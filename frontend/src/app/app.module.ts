@@ -1,6 +1,9 @@
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+
+import { ClipboardModule } from 'ngx-clipboard';
 
 import { AppComponent } from './app.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
@@ -12,7 +15,9 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
   ],
   imports: [
     BrowserModule,
-    ReactiveFormsModule,
+    ClipboardModule,
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

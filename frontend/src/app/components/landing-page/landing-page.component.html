@@ -1,25 +1,25 @@
-<div class="center blue-background query-container" [ngClass]="showType == 'Shorten' ? 'bottom-left-tip-edge' : 'bottom-left-tip-curve length-chosen'">
+<div class="center blue-background query-container" [ngClass]="mode == 'Shorten' ? 'bottom-left-tip-edge' : 'bottom-left-tip-curve length-chosen'">
     <form class="form align-left" [formGroup]="urlForm" (ngSubmit)="onSubmit()">
-        <p> {{showType}} your link </p>
+        <p> {{mode}} your link </p>
         <div class="space">
-        <input type="email" formControlName="url" class="input">
-        <button class="button" type="submit" [disabled] = "!urlForm.valid"> {{showType}} </button>
+            <input type="email" formControlName="url" class="input">
+            <button class="button" type="submit" [disabled] = "!urlForm.valid"> {{mode}} </button>
         </div>
     </form>
 </div>
 <div class="tabs">
-    <div class="tab" [ngClass]="showType == 'Shorten' ? 'blue-background': ''">
+    <div class="tab" [ngClass]="mode == 'Shorten' ? 'blue-background': ''">
         <p (click)="switchShowType()"> Shorten URL </p>
     </div>
-    <div class="tab" [ngClass]="showType != 'Shorten' ? 'blue-background': ''">
-        <p (click)="switchShowType()"> Lengthen URL </p>
+    <div class="tab" [ngClass]="mode != 'Shorten' ? 'blue-background': ''">
+        <p (click)="switchShowType()"> Decode URL </p>
     </div>
 </div>
 
-<div class="center result-container align-left">
-    <p> Results </p>
+<div class="center result-container align-left" *ngIf="results">
+    <p> Results ({{resultMode}}) </p>
     <div class="result">
-        <p class="result-value"> bitly.asfas </p>
-        <button class="button result-button"> Copy </button>
+        <p class="result-value"> {{results}} </p>
+        <button class="button result-button" (click)="copyResults()"> Copy </button>
     </div>
 </div>
