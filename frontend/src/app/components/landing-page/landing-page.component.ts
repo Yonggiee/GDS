@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
+import { Mode } from "./show-types";
 
 @Component({
   selector: 'app-landing-page',
@@ -12,7 +13,7 @@ export class LandingPageComponent implements OnInit {
     url: new FormControl('', [Validators.required])
   });
 
-  showType = "Shorten";
+  showType = Mode.SHORTEN;
 
   constructor() { }
 
@@ -22,10 +23,10 @@ export class LandingPageComponent implements OnInit {
   onSubmit() {}
 
   switchShowType() {
-    if (this.showType == "Shorten") {
-      this.showType = "Lengthen";
+    if (this.showType == Mode.SHORTEN) {
+      this.showType = Mode.LENGTHEN;
     } else {
-      this.showType = "Shorten";
+      this.showType = Mode.SHORTEN;
     }
   }
 }
