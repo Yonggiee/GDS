@@ -3,12 +3,12 @@ const cors = require('cors');
 
 // Import routers
 const healthCheckRouter = require('../routes/healthcheck');
-const shortenerRouter = require('../routes/shortener')
+const shortenRouter = require('../routes/shorten')
 
 const router = express.Router();
 // Define routes
 router.use("/healthcheck", healthCheckRouter)
-router.use("/shortener", shortenerRouter )
+router.use("/shorten", shortenRouter )
 
 const app = express();
 app.use(express.json())

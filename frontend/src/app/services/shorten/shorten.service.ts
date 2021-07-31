@@ -6,7 +6,7 @@ import { baseurl, httpOptions } from '../commons.service';
 @Injectable({
   providedIn: 'root'
 })
-export class ShortenerService {
+export class ShortenService {
 
   constructor(private http: HttpClient)  { }
 

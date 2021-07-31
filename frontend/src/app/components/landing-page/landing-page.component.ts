@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl } from "@angular/forms";
 import { Validators } from "@angular/forms";
 import { ClipboardService } from 'ngx-clipboard';
-import { ShortenerService } from "src/app/services/shortener/shortener.service";
+import { ShortenService } from "src/app/services/shorten/shorten.service";
 import { Mode } from "./show-types";
 
 @Component({
@@ -20,7 +20,7 @@ export class LandingPageComponent implements OnInit {
   results: string = "";
 
   constructor(private clipboardService: ClipboardService,
-    private shortenerService: ShortenerService) { }
+    private shortenService: ShortenService) { }
 
   ngOnInit(): void {
   }
@@ -29,11 +29,11 @@ export class LandingPageComponent implements OnInit {
     let url = this.urlForm.controls["url"].value;
     this.urlForm.reset();
     if (this.mode == Mode.SHORTEN) {
-      this.shortenerService.postShortenUrl(url).subscribe((res) => {
+      this.shortenService.postShortenUrl(url).subscribe((res) => {
         this.results = res["url_to"];
       });
     } else {
-      this.shortenerService.getDecodedUrl(url).subscribe((res) => {
+      this.shortenService.getDecodedUrl(url).subscribe((res) => {
         this.results = res["url_from"];
         },  (err) => {
           this.results = "No URL found!";

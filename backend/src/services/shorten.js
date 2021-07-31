@@ -19,7 +19,6 @@ function convertIntToBase62(val) {
     return converted;
 }
 
-
 function shorten(url) {
     const urlInInt = convertStringToInt(url);
     const urlInBase62 = convertIntToBase62(urlInInt);

@@ -1,11 +1,11 @@
 const express = require('express');
 const HttpStatusCodes = require('../utils/HttpStatusCodes')
 const { pool } = require('../services/db');
-const shorten = require('../services/shortener')
+const shorten = require('../services/shorten')
 
-const shortenerRouter = express.Router();
+const shortenRouter = express.Router();
 
-shortenerRouter.get('/', async (req, res) => {
+shortenRouter.get('/', async (req, res) => {
     const base62Encoded = req.query.url;
     try {
         const { rows } = await pool.query(
@@ -22,7 +22,7 @@ shortenerRouter.get('/', async (req, res) => {
     }
 });
 
-shortenerRouter.post('/', async (req, res) => {
+shortenRouter.post('/', async (req, res) => {
     const originalUrl = req.query.url;
     const base62Encoded = shorten(originalUrl);
     try {
@@ -38,4 +38,4 @@ shortenerRouter.post('/', async (req, res) => {
     }
 });
 
-module.exports = shortenerRouter
+module.exports = shortenRouter
