@@ -1,18 +1,18 @@
 /* Commons */
 .center {
-    text-align: center;
+  text-align: center;
 }
 
 .blue-background {
-    background-color: #435B81;
+  background-color: #435B81;
 }
 
 .space {
-    margin: 0% 1%;
+  margin: 0% 1%;
 }
 
 .align-left {
-    text-align: left;
+  text-align: left;
 }
 
 .button {
@@ -28,19 +28,19 @@
 
 /* Query container */
 .query-container {
-    color: white;
-    font-weight: bold;
-    margin: 7% 20% 0% 20%;
-    padding: 1% 2% 2% 2%;
-    font-size: large;
+  color: white;
+  font-weight: bold;
+  margin: 7% 20% 0% 20%;
+  padding: 1% 2% 2% 2%;
+  font-size: large;
 }
 
 .bottom-left-tip-curve {
-    border-radius: 15px;
+  border-radius: 15px;
 }
 
 .bottom-left-tip-edge {
-    border-radius: 15px 15px 15px 0px;
+  border-radius: 15px 15px 15px 0px;
 }
 
 /* Form */
@@ -60,16 +60,16 @@
 
 /* Tabs */
 .tabs {
-    margin: 0% 20%;
-    color: white;
-    font-weight: bold;
+  margin: 0% 20%;
+  color: white;
+  font-weight: bold;
 }
 
 .tab {
-    border-radius: 0px 0px 15px 15px;
-    padding: 1% 2%;
-    display:inline-block;
-    vertical-align:top;
+  border-radius: 0px 0px 15px 15px;
+  padding: 1% 2%;
+  display:inline-block;
+  vertical-align:top;
 }
 
 /* Result container */
@@ -100,45 +100,45 @@
 }
 
 @media only screen and (max-width: 760px) {
-    /* Commons */
-    .button {
-        margin-top: 15px;
-        height: 40px;
-        width: 100%;
-        margin-left: 0px;
-    }
+  /* Commons */
+  .button {
+    margin-top: 15px;
+    height: 40px;
+    width: 100%;
+    margin-left: 0px;
+  }
 
-    /* Query container */
-    .query-container {
-        margin: 15% 10% 0% 10%;
-        padding: 2% 6%;
-    }
+  /* Query container */
+  .query-container {
+    margin: 15% 10% 0% 10%;
+    padding: 2% 6%;
+  }
 
-    .length-chosen {
-        border-radius: 15px 15px 0px 15px;
-    }
+  .length-chosen {
+    border-radius: 15px 15px 0px 15px;
+  }
 
-    /* Form */
-    .input {
-      width: 98%;
-    }
+  /* Form */
+  .input {
+    width: 96%;
+  }
 
-    /* Tabs */
-    .tabs {
-      margin: 0% 10%;
-      width: 98%;
-    }
+  /* Tabs */
+  .tabs {
+    margin: 0% 10%;
+    width: 98%;
+  }
 
-    .tab {
-      padding-top: 1%;
-      padding-bottom: 1%;
-      width: 36.85%;
-      text-align: center;
-    }
+  .tab {
+    padding-top: 1%;
+    padding-bottom: 1%;
+    width: 36.85%;
+    text-align: center;
+  }
 
-    /* Result container */
-    .result-container {
-      margin: 7% 10% 0% 10%;
-      padding: 2% 6% 5% 6%;
-    }
+  /* Result container */
+  .result-container {
+    margin: 7% 10% 0% 10%;
+    padding: 2% 6% 5% 6%;
+  }
 }
