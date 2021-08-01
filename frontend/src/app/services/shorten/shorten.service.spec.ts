@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ShortenService } from './shorten.service';
+import { ShortenService } from './shortener.service';
 
 describe('ShortenService', () => {
   let service: ShortenService;

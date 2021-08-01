@@ -25,10 +25,11 @@ shortenRouter.get('/', async (req, res) => {
 shortenRouter.post('/', async (req, res) => {
     const originalUrl = req.query.url;
     const base62Encoded = shorten(originalUrl);
+    const newMapping = "shorty.tc/" + base62Encoded; 
     try {
         const { rows } = await pool.query(
             "SELECT insertUrlMapping($1, $2) as url_to;",
-            [originalUrl, base62Encoded]
+            [originalUrl, newMapping]
         );
         return res.status(HttpStatusCodes.OK)
                 .json(rows[0]);

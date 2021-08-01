@@ -12,7 +12,7 @@ services:
     ports:
       - 5432:5432
     volumes:
-        - ../../database/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ../../database/init.sql:/docker-entrypoint-initdb.d/init.sql
   server:
     image: shorty_server
     container_name: shorty_server
@@ -23,7 +23,7 @@ services:
     environment:
       USER: tester
       PASSWORD: password1
-      HOST: db
+      HOST: shorty_db
       DATABASE: shorty
       DB_PORT: 5432
     volumes:

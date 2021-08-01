@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl } from "@angular/forms";
 import { Validators } from "@angular/forms";
 import { ClipboardService } from 'ngx-clipboard';
-import { ShortenService } from "src/app/services/shorten/shorten.service";
+import { ShortenService } from "src/app/services/shorten/shortener.service";
 import { Mode } from "./show-types";
 
 @Component({

@@ -12,11 +12,11 @@ export class ShortenService {
 
   postShortenUrl(url: string): Observable<any> {
     const params = new HttpParams().set("url", url);
-    return this.http.post(baseurl + "/api/shortener?url=" + url, httpOptions);
+    return this.http.post(baseurl + "/shorten?url=" + url, httpOptions);
   }
 
   getDecodedUrl(url: string): Observable<any> {
     const params = new HttpParams().set("url", url);
-    return this.http.get(baseurl + "/api/shortener?url=" + url, httpOptions);
+    return this.http.get(baseurl + "/shorten?url=" + url, httpOptions);
   }
 }
