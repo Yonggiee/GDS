@@ -1,4 +1,4 @@
 export enum Mode {
-  SHORTEN = "Shorten",
-  DECODE = "Decode"
+  SHORTEN = 'Shorten',
+  DECODE = 'Decode'
 }

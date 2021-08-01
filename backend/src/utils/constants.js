@@ -1,11 +1,13 @@
-const BASE62ENCODING = "1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
+const ADJUSTVALUE = 33;
 const BASE10 = 10;
 const BASE62 = 62;
-const ADJUSTVALUE = 33;
+const BASE62ENCODING = '1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
+const SHORTYURL = 'shorty.tc/';
 
 module.exports = {
     ADJUSTVALUE,
     BASE10,
     BASE62,
-    BASE62ENCODING
+    BASE62ENCODING,
+    SHORTYURL
 }

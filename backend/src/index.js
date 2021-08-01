@@ -1,11 +1,15 @@
 const app = require('./services/server')
 const { initDb } = require('./services/db')
+const { initCron } = require('./services/cron')
 const PORT = process.env.PORT || 5000;
 
 (async () => {
-  // init postgres DB:
+
   try {
+    // init postgres DB:
     await initDb();
+    // init cron task
+    await initCron();
   } catch (err) {
     console.log(err);
     process.exit(1)

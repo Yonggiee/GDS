@@ -8,9 +8,9 @@ const pool = new Pool({
 })
 
 async function initDb() {
-  console.log("Connecting to postgres DB...");
+  console.log('Connecting to postgres DB...');
   await pool.connect();
-  console.log("Successfully connected to postgres DB");
+  console.log('Successfully connected to postgres DB');
 }
 
 module.exports = {

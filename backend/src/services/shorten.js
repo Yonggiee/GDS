@@ -10,7 +10,7 @@ function convertStringToInt(str) {
 }
 
 function convertIntToBase62(val) {
-    let converted = "";
+    let converted = '';
     while(val > 0) {
         leftOver = val % BASE62;
         converted += BASE62ENCODING[leftOver];

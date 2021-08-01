@@ -20,6 +20,7 @@
     <p> Results ({{resultMode}}) </p>
     <div class="result">
         <p class="result-value"> {{results}} </p>
-        <button class="button result-button" (click)="copyResults()"> Copy </button>
+        <button class="button result-button" (click)="copyResults()" *ngIf="!isCopied"> Copy </button>
+        <button class="button result-button" (click)="copyResults()" *ngIf="isCopied"> Copied </button>
     </div>
 </div>
