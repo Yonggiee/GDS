@@ -3,6 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { ClipboardService } from 'ngx-clipboard';
 import { ShortenService } from 'src/app/services/shorten/shorten.service';
+import { tsParticles } from 'tsparticles';
 import { Mode } from './show-types';
 
 @Component({

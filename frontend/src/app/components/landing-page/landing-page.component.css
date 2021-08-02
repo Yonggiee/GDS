@@ -4,7 +4,7 @@
 }
 
 .blue-background {
-  background-color: #435B81;
+  background-color: #2a3d5d78;
 }
 
 .space {
@@ -28,7 +28,7 @@
 
 /* Query container */
 .query-container {
-  color: white;
+  color: rgb(255, 255, 255);
   font-weight: bold;
   margin: 7% 20% 0% 20%;
   padding: 1% 2% 2% 2%;
@@ -138,7 +138,7 @@
 
   /* Result container */
   .result-container {
-    margin: 7% 10% 0% 10%;
+    margin: 7% 10% 20% 10%;
     padding: 2% 6% 5% 6%;
   }
 }
