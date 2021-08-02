@@ -7,13 +7,17 @@ import { ClipboardModule } from 'ngx-clipboard';
 
 import { AppComponent } from './app.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { AppRoutingModule } from './app-routing.module';
+import { RedirectPageComponent } from './components/redirect-page/redirect-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LandingPageComponent
+    LandingPageComponent,
+    RedirectPageComponent
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     ClipboardModule,
     HttpClientModule,

@@ -1,7 +1,7 @@
 const express = require('express');
-const HttpStatusCodes = require('../utils/HttpStatusCodes')
 const { pool } = require('../services/db');
-const shorten = require('../services/shorten')
+const HttpStatusCodes = require('../utils/HttpStatusCodes')
+const shorten = require('../utils/shorten')
 const { SHORTYURL } = require('../utils/constants');
 
 const shortenRouter = express.Router();
@@ -42,13 +42,25 @@ shortenRouter.post('/', async (req, res) => {
             });
     }
 
-    const base62Encoded = shorten(originalUrl);
-    const newMapping = SHORTYURL + base62Encoded; 
     try {
         const { rows } = await pool.query(
-            'SELECT insertUrlMapping($1, $2) as url_to;',
-            [originalUrl, newMapping]
+            'SELECT insertUrlMapping($1) as url_to;',
+            [originalUrl]
         );
+        if (!isNaN(rows[0]['url_to'])) {
+            const id = rows[0]['url_to'];
+            const newMapping = shorten(id);
+            await pool.query(
+                'UPDATE url_mapping \
+                    SET url_to = $1  \
+                WHERE id = $2;',
+                [newMapping, id]
+            );
+            return res.status(HttpStatusCodes.OK)
+                .json({
+                    url_to: newMapping
+                });
+        }
         return res.status(HttpStatusCodes.OK)
                 .json(rows[0]);
     } catch (err) {

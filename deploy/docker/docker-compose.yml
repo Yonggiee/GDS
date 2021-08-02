@@ -26,6 +26,7 @@ services:
       HOST: shorty_db
       DATABASE: shorty
       DB_PORT: 5432
+      DNS: 'localhost:4200/'
     volumes:
       - ../../backend:/app
     ports:
