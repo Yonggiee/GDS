@@ -1,6 +1,5 @@
 # Shorty
-
-# A URL Shortening Service
+A URL Shortening Service
 
 ## Description
 A URL shortening service (like [bit.ly](https://bit.ly)). Application hosted on [littleshorty.link](http://littleshorty.link).
