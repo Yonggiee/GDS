@@ -3,7 +3,7 @@
 # A URL Shortening Service
 
 ## Description
-A URL shortening service (like [bit.ly](https://bit.ly)). Application hosted on `littleshorty.link`
+A URL shortening service (like [bit.ly](https://bit.ly)). Application hosted on [littleshorty.link](http://littleshorty.link).
 - Shortens a given URL to a `shorty` URL
 - Decodes `shorty` URL
 - Redirects from `shorty` URL if stored in database
