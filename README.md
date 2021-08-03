@@ -24,7 +24,9 @@ A URL shortening service (like [bit.ly](https://bit.ly)). Application hosted on 
 ## Deployment
 
 ### Production
-[littleshorty.link](http://littleshorty.link)
+
+Application is hosted on two AWS EC2 instances. One of which is running the frontend client and the other is backend + database (Too poor for AWS RDS). 
+Frontend endpoint [littleshorty.link](http://littleshorty.link)
 
 ### Local
 
