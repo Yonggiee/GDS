@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS url_mapping CASCADE;
 
 CREATE TABLE url_mapping (
-    id SERIAL PRIMARY KEY,
+    id INTEGER PRIMARY KEY,
     url_from VARCHAR(255) NOT NULL UNIQUE,
     url_to VARCHAR(255) NOT NULL,
     last_accessed TIMESTAMP NOT NULL default CURRENT_TIMESTAMP
@@ -32,17 +32,17 @@ RETURNS TABLE (result VARCHAR)
 LANGUAGE plpgsql
 AS
 $$
-DECLARE lowest_id VARCHAR;
+DECLARE lowest_id INTEGER;
 
 BEGIN
     IF NOT EXISTS (SELECT 1 FROM url_mapping WHERE url_from=val_url_from) THEN
-        SELECT CAST(inc.n AS VARCHAR) INTO lowest_id
+        SELECT inc.n INTO lowest_id
             FROM generate_series(1, (SELECT COALESCE(MAX(id), 0) FROM url_mapping) + 1) AS inc(n) 
         WHERE inc.n NOT IN (SELECT id FROM url_mapping);
 
-        INSERT INTO url_mapping(url_from, url_to) VALUES (val_url_from, 'Creating URL...');
+        INSERT INTO url_mapping VALUES (lowest_id, val_url_from, 'Creating URL...');
         RETURN query 
-            SELECT lowest_id;
+            SELECT CAST(lowest_id AS VARCHAR);
     ELSE
         UPDATE url_mapping
             SET last_accessed = NOW()

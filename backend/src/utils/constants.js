@@ -1,5 +1,5 @@
 const BASE62 = 62;
-const BASE62ENCODING = '1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
+const BASE62ENCODING = 'qwert1yu5iopasdfg2hj7k3lzxcv84bnmQWER6TYUI9OPASDFGHJ0KLZXCVBNM';
 const DB_DATABASE = process.env.DATABASE;
 const DB_HOST = process.env.HOST;
 const DB_PASSWORD = process.env.PASSWORD;
