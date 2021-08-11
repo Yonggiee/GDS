@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+  db:
+    restart: always
+    image: postgres:latest
+    container_name: shorty_db
+    environment:
+      POSTGRES_USER: tester # Change during actual deployment
+      POSTGRES_PASSWORD: password1 # Change during actual deployment
+      POSTGRES_DB: shorty
+    ports:
+      - 5432:5432
+    volumes:
+      - ../../database/init.sql:/docker-entrypoint-initdb.d/init.sql
+  server:
+    image: shorty_server
+    container_name: shorty_server
+    restart: always
+    build:
+      context: ../../backend
+      dockerfile: ./build_image/Dockerfile-dev
+    environment:
+      USER: tester
+      PASSWORD: password1
+      HOST: shorty_db
+      DATABASE: shorty
+      DB_PORT: 5432
+      DNS: 'localhost:4200/'
+    volumes:
+      - ../../backend:/app
+    ports:
+      - 5000:5000
+    depends_on:
+      - db
+  client:
+    image: shorty_client
+    container_name: shorty_client
+    restart: always
+    build:
+      context: ../../frontend
+      dockerfile: ./build_image/Dockerfile-dev
+    volumes:
+      - ../../frontend:/app
+    ports:
+      - 4200:4200
+    depends_on:
+      - server
