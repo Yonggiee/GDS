@@ -4,11 +4,14 @@ FROM node:lts-alpine as builder
 # Set the working direction
 WORKDIR /app
 
-# Copy files to container
-COPY . .
+# Copy package.json
+COPY package.json .
 
 # Install dependencies
 RUN yarn
+
+# Copy files to container
+COPY . .
 
 # Build app
 RUN yarn build

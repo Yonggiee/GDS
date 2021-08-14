@@ -4,11 +4,14 @@ FROM node:lts-alpine as builder
 # Set the working direction
 WORKDIR /app
 
-# Copy files to container
-COPY . .
+# Copy package.json
+COPY package.json .
 
 # Install dependencies
 RUN npm i -g @angular/cli
 RUN npm i
+
+# Copy files to container
+COPY . .
 
 CMD ["ng", "serve", "--host", "0.0.0.0", "--port", "4200"]
