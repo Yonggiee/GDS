@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node -r dotenv/config src/index.js dotenv_config_path=.env.development.local",
-    "dev": "nodemon src/index.js",
+    "dev": "nodemon -r dotenv/config src/index.js dotenv_config_path=.env.development.local",
     "test": "jest --coverage --setupFiles dotenv/config"
   },
   "dependencies": {
