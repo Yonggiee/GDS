@@ -4,8 +4,13 @@ CREATE TABLE url_mapping (
     id INTEGER PRIMARY KEY,
     url_from VARCHAR(255) NOT NULL UNIQUE,
     url_to VARCHAR(255) NOT NULL,
-    last_accessed TIMESTAMP NOT NULL default CURRENT_TIMESTAMP
+    last_accessed TIMESTAMP NOT NULL default CURRENT_TIMESTAMP,
+    is_active BOOLEAN NOT NULL DEFAULT true
 );
+
+exists and is_active
+exists and not_active
+dont exists
 
 DROP FUNCTION IF EXISTS selectUrlMapping;
 CREATE OR REPLACE FUNCTION selectUrlMapping(val_url_to VARCHAR)
@@ -14,15 +19,19 @@ LANGUAGE plpgsql
 AS
 $$
 BEGIN
-    IF EXISTS (SELECT 1 FROM url_mapping WHERE url_to=val_url_to) THEN
+    IF EXISTS (SELECT 1 FROM url_mapping WHERE url_to=val_url_to and is_active=true) THEN
         UPDATE url_mapping
-            SET last_accessed = NOW()
+            SET last_accessed = NOW() and is_active = false
         WHERE url_to = val_url_to;
+        RETURN query
+            SELECT url_from 
+                FROM url_mapping
+            WHERE url_to = val_url_to;
     END IF;
 	RETURN query
         SELECT url_from 
             FROM url_mapping
-        WHERE url_to = val_url_to;
+        WHERE url_to = val_url_to and is_active = true;
 END;
 $$;
 
