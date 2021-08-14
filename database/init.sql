@@ -8,10 +8,6 @@ CREATE TABLE url_mapping (
     is_active BOOLEAN NOT NULL DEFAULT true
 );
 
-exists and is_active
-exists and not_active
-dont exists
-
 DROP FUNCTION IF EXISTS selectUrlMapping;
 CREATE OR REPLACE FUNCTION selectUrlMapping(val_url_to VARCHAR)
 RETURNS TABLE (result VARCHAR)
@@ -21,7 +17,7 @@ $$
 BEGIN
     IF EXISTS (SELECT 1 FROM url_mapping WHERE url_to=val_url_to and is_active=true) THEN
         UPDATE url_mapping
-            SET last_accessed = NOW() and is_active = false
+            SET last_accessed = NOW(), is_active = false
         WHERE url_to = val_url_to;
         RETURN query
             SELECT url_from 
