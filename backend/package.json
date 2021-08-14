@@ -4,11 +4,12 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "start": "node -r dotenv/config src/index.js dotenv_config_path=.env.development.local",
+    "dev": "nodemon -r dotenv/config src/index.js dotenv_config_path=.env.development.local"
   },
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "node-cron": "^3.0.0",
     "nodemon": "^2.0.12",
