@@ -17,7 +17,8 @@ $$
 BEGIN
     IF EXISTS (SELECT 1 FROM url_mapping WHERE url_to=val_url_to and is_active=true) THEN
         UPDATE url_mapping
-            SET last_accessed = NOW(), is_active = false
+            SET last_accessed = NOW(),
+                is_active = false
         WHERE url_to = val_url_to;
         RETURN query
             SELECT url_from 
@@ -50,7 +51,8 @@ BEGIN
             SELECT CAST(lowest_id AS VARCHAR);
     ELSE
         UPDATE url_mapping
-            SET last_accessed = NOW()
+            SET last_accessed = NOW(),
+                is_active = true
         WHERE url_from = val_url_from;
         RETURN query
             SELECT url_to 
