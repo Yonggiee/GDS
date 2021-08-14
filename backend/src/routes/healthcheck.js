@@ -1,5 +1,5 @@
 const express = require('express');
-const HttpStatusCodes = require('../utils/HttpStatusCodes')
+const HttpStatusCodes = require('../utils/HttpStatusCodes');
 
 const healthCheckRouter = express.Router();
 

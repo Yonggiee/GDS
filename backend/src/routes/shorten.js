@@ -27,7 +27,7 @@ shortenRouter.get('/', async (req, res) => {
         }
         return res.status(200).json(rows[0]);
     } catch (err) {
-        console.log(err)
+        console.log(err);
         return res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json();
     }
 });
@@ -64,9 +64,9 @@ shortenRouter.post('/', async (req, res) => {
         return res.status(HttpStatusCodes.OK)
                 .json(rows[0]);
     } catch (err) {
-        console.log(err)
+        console.log(err);
         return res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json();
     }
 });
 
-module.exports = shortenRouter
+module.exports = shortenRouter;
