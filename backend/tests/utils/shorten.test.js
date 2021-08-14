@@ -1,4 +1,4 @@
-const shorten = require('src/utils/shorten');
+const shorten = require('utils/shorten');
 
 test('Util - shorten', () => {
     const int = 1;

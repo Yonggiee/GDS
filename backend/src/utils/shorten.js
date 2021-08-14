@@ -1,7 +1,6 @@
 const { BASE62, BASE62ENCODING, SHORTYURL } = require('./constants');
 
 function shorten(int) {
-    console.log(SHORTYURL)
     const base62EncodingUrl = convertIntToBase62(int);
     return SHORTYURL + base62EncodingUrl;
 }
