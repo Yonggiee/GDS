@@ -19,5 +19,8 @@ RUN yarn build
 # Smaller production image
 FROM nginx:stable-alpine
 
+COPY build_image/nginx/nginx.conf /etc/nginx/nginx.conf
+RUN rm /etc/nginx/conf.d/default.conf
+
 COPY --from=builder /app/dist/frontend /usr/share/nginx/html
 CMD ["nginx", "-g", "daemon off;"]
