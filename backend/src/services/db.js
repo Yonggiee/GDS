@@ -5,13 +5,17 @@ const pool = new Pool({
   host: DB_HOST,
   database: DB_NAME,
   password: DB_PASSWORD,
-  port: DB_PORT
+  port: DB_PORT,
+  max: 10,
+  idleTimeoutMillis: 10000,
+  connectionTimeoutMillis: 0,
 })
 
 async function initDb() {
   console.log('Connecting to postgres DB...');
-  await pool.connect();
+  const client = await pool.connect();
   console.log('Successfully connected to postgres DB');
+  client.release();
 }
 
 module.exports = {
