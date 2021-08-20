@@ -1,16 +1,16 @@
 const express = require('express');
 const { pool } = require('../services/db');
-const HttpStatusCodes = require('../utils/HttpStatusCodes')
+const HTTP_STATUS_CODES = require('../utils/httpStatusCodes')
 const shorten = require('../utils/shorten')
-const { SHORTYURL } = require('../utils/constants');
+const { SHORTY_URL } = require('../utils/constants');
 
 const shortenRouter = express.Router();
 
 shortenRouter.get('/', async (req, res) => {
     const base62Encoded = req.query.url;
 
-    if (!base62Encoded.includes(SHORTYURL)) {
-        return res.status(HttpStatusCodes.BAD_REQUEST).json({ //
+    if (!base62Encoded.includes(SHORTY_URL)) {
+        return res.status(HTTP_STATUS_CODES.BAD_REQUEST).json({ //
             err: 'Not a shorty URL.'
         });
     }
@@ -21,22 +21,22 @@ shortenRouter.get('/', async (req, res) => {
             [ base62Encoded ]
         );
         if(rows.length == 0) {
-            return res.status(HttpStatusCodes.NOT_FOUND).json({
+            return res.status(HTTP_STATUS_CODES.NOT_FOUND).json({
                 err: 'No URL found!'
             });
         }
         return res.status(200).json(rows[0]);
     } catch (err) {
         console.log(err);
-        return res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json();
+        return res.status(HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR).json();
     }
 });
 
 shortenRouter.post('/', async (req, res) => {
     const originalUrl = req.query.url;
 
-    if (originalUrl.includes(SHORTYURL)) {
-        return res.status(HttpStatusCodes.BAD_REQUEST)
+    if (originalUrl.includes(SHORTY_URL)) {
+        return res.status(HTTP_STATUS_CODES.BAD_REQUEST)
             .json({
                 err: 'This is already a shorty URL!'
             });
@@ -56,16 +56,16 @@ shortenRouter.post('/', async (req, res) => {
                 WHERE id = $2;',
                 [newMapping, id]
             );
-            return res.status(HttpStatusCodes.OK)
+            return res.status(HTTP_STATUS_CODES.OK)
                 .json({
                     url_to: newMapping
                 });
         }
-        return res.status(HttpStatusCodes.OK)
+        return res.status(HTTP_STATUS_CODES.OK)
                 .json(rows[0]);
     } catch (err) {
         console.log(err);
-        return res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json();
+        return res.status(HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR).json();
     }
 });
 
