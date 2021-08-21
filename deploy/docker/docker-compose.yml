@@ -21,10 +21,10 @@ services:
       context: ../../backend
       dockerfile: ./build_image/Dockerfile
     environment:
-      USER: tester
-      PASSWORD: password1
-      HOST: shorty_db
-      DATABASE: shorty
+      DB_USER: tester
+      DB_PASSWORD: password1
+      DB_HOST: shorty_db
+      DB_NAME: shorty
       DB_PORT: 5432
       DNS: 'localhost:4200/'
     volumes:
