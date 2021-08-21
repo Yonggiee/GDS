@@ -1,5 +1,5 @@
 const app = require('./services/server')
-const { initDb } = require('./services/db')
+const { initDb, pool } = require('./services/db')
 const { initCron } = require('./services/cron')
 const PORT = process.env.PORT || 5000;
 
@@ -12,6 +12,7 @@ const PORT = process.env.PORT || 5000;
     await initCron();
   } catch (err) {
     console.log(err);
+    pool.end();
     process.exit(1)
   }
 
