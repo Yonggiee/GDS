@@ -1,6 +1,6 @@
-const app = require('./services/server')
-const { initDb, pool } = require('./services/db')
-const { initCron } = require('./services/cron')
+const app = require('./services/server');
+const { initDb, pool } = require('./services/db');
+const { initCron } = require('./services/cron');
 const PORT = process.env.PORT || 5000;
 
 (async () => {
@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 5000;
   } catch (err) {
     console.log(err);
     pool.end();
-    process.exit(1)
+    process.exit(1);
   }
 
   // init Express:

@@ -9,7 +9,7 @@ const pool = new Pool({
   max: 10,
   idleTimeoutMillis: 10000,
   connectionTimeoutMillis: 0,
-})
+});
 
 async function initDb() {
   console.log('Connecting to postgres DB...');
@@ -21,4 +21,4 @@ async function initDb() {
 module.exports = {
   initDb,
   pool
-}
+};

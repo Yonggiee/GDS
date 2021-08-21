@@ -10,4 +10,4 @@ const HTTP_STATUS_CODES = {
     // server 5xx
     'INTERNAL_SERVER_ERROR': 500
 };
-module.exports = HTTP_STATUS_CODES
+module.exports = HTTP_STATUS_CODES;

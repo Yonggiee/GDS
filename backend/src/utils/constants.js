@@ -16,4 +16,4 @@ module.exports = {
     DB_PORT,
     DB_USER,
     SHORTY_URL
-}
+};

@@ -8,8 +8,8 @@ function shorten(int) {
 function convertIntToBase62(val) {
     let converted = '';
     while(val > 0) {
-        leftOver = val % BASE62;
-        converted += BASE62_ENCODING[leftOver];
+        leastSignificant = val % BASE62;
+        converted += BASE62_ENCODING[leastSignificant];
         val = Math.floor(val / BASE62);
     }
     return converted;
