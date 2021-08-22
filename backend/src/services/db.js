@@ -1,5 +1,11 @@
-const { DB_USER, DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT } = require('../utils/constants');
-const { Pool } = require('pg');
+const {
+  DB_USER,
+  DB_HOST,
+  DB_NAME,
+  DB_PASSWORD,
+  DB_PORT,
+} = require("../utils/constants");
+const { Pool } = require("pg");
 const pool = new Pool({
   user: DB_USER,
   host: DB_HOST,
@@ -12,13 +18,13 @@ const pool = new Pool({
 });
 
 async function initDb() {
-  console.log('Connecting to postgres DB...');
+  console.log("Connecting to postgres DB...");
   const client = await pool.connect();
-  console.log('Successfully connected to postgres DB');
+  console.log("Successfully connected to postgres DB");
   client.release();
 }
 
 module.exports = {
   initDb,
-  pool
+  pool,
 };

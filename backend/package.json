@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node -r dotenv/config src/index.js dotenv_config_path=.env.development.local",
     "dev": "nodemon -r dotenv/config src/index.js dotenv_config_path=.env.development.local",
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "format": "prettier --write \"src/**/*.js\""
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -18,6 +19,7 @@
     "supertest": "^6.1.5"
   },
   "devDependencies": {
-    "jest": "^27.0.6"
+    "jest": "^27.0.6",
+    "prettier": "^2.3.2"
   }
 }
