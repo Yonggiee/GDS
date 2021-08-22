@@ -1,8 +1,8 @@
 const { BASE62, BASE62_ENCODING, SHORTY_URL } = require('./constants');
 
-function shorten(int) {
-    const base62EncodingUrl = convertIntToBase62(int);
-    return SHORTY_URL + base62EncodingUrl;
+function shortenToTag(int) {
+    const base62EncodingTag = convertIntToBase62(int);
+    return base62EncodingTag;
 }
 
 function convertIntToBase62(val) {
@@ -15,4 +15,14 @@ function convertIntToBase62(val) {
     return converted;
 }
 
-module.exports = shorten;
+function extractTag(url) {
+    if (!url.includes(SHORTY_URL)) {
+        return '';
+    }
+    return url.substring(SHORTY_URL.length);
+}
+
+module.exports = {
+    extractTag,
+    shortenToTag
+};

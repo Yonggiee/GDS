@@ -1,15 +1,17 @@
 const express = require('express');
 const { pool } = require('../services/db');
 const HTTP_STATUS_CODES = require('../utils/httpStatusCodes');
-const shorten = require('../utils/shorten');
+const { extractTag, shortenToTag } = require('../utils/shorten');
 const { SHORTY_URL } = require('../utils/constants');
 
 const shortenRouter = express.Router();
 
 shortenRouter.get('/', async (req, res) => {
-    const base62Encoded = req.query.url;
+    const shortenUrl = req.query.url;
 
-    if (!base62Encoded.includes(SHORTY_URL)) {
+    const shortenTag = extractTag(shortenUrl);
+
+    if (shortenTag == '') {
         return res.status(HTTP_STATUS_CODES.BAD_REQUEST).json({
             err: 'Not a shorty URL.'
         });
@@ -17,11 +19,11 @@ shortenRouter.get('/', async (req, res) => {
 
     try {
         const { rows } = await pool.query(
-            'SELECT selectUrlMapping($1) as url_from;',
-            [ base62Encoded ]
+            'SELECT selectUrlMapping($1) as original_url;',
+            [ shortenTag ]
         );
         const row = rows[0];
-        if(row['url_from'] == null) {
+        if(row['original_url'] == null) {
             return res.status(HTTP_STATUS_CODES.NOT_FOUND).json({
                 err: 'No URL found!'
             });
@@ -48,16 +50,19 @@ shortenRouter.post('/', async (req, res) => {
         try {
             await client.query('BEGIN');
             const { rows } = await pool.query(
-                'SELECT url_to \
+                'SELECT shorten_tag \
                     FROM url_mapping \
-                WHERE url_from = $1',
+                WHERE original_url = $1',
                 [originalUrl]
             );
             
             if (rows.length > 0) {
                 client.release();
+                const row = rows[0];
                 return res.status(HTTP_STATUS_CODES.OK)
-                    .json(rows[0]);
+                    .json({
+                        shorten_url: SHORTY_URL + row['shorten_tag']
+                    });
             } 
 
             const result = await pool.query(
@@ -67,17 +72,17 @@ shortenRouter.post('/', async (req, res) => {
             );
             const lowestId = result['rows'][0]['lowest_id'];  
             
-            const newMapping = shorten(lowestId);
+            const shortenTag = shortenToTag(lowestId);
             await client.query(
-                'INSERT INTO url_mapping (id, url_from, url_to) VALUES ($1, $2, $3);',
-                [lowestId, originalUrl, newMapping]
+                'INSERT INTO url_mapping (id, original_url, shorten_tag) VALUES ($1, $2, $3);',
+                [lowestId, originalUrl, shortenTag]
             );
             await client.query('COMMIT');
             client.release();
     
             return res.status(HTTP_STATUS_CODES.OK)
                 .json({
-                    url_to: newMapping
+                    shorten_url: SHORTY_URL + shortenTag
                 });
         } catch (err) {
             console.log(err);
