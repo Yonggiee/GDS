@@ -34,7 +34,7 @@ export class LandingPageComponent implements OnInit {
     this.isCopied = false;
     if (this.mode == Mode.SHORTEN) {
       this.shortenService.postShortenUrl(url).subscribe((res) => {
-        this.results = res['url_to'];
+        this.results = res['shorten_url'];
       }, (err) => {
         if (err.error) {
           this.results = err.error['err'];
@@ -42,7 +42,7 @@ export class LandingPageComponent implements OnInit {
       });
     } else {
       this.shortenService.getDecodedUrl(url).subscribe((res) => {
-        this.results = res['url_from'];
+        this.results = res['original_url'];
       }, (err) => {
         if (err.error) {
           this.results = err.error['err'];

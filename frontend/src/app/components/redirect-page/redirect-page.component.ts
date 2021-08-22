@@ -18,7 +18,7 @@ export class RedirectPageComponent implements OnInit {
   redirect(): void {
     const url = 'localhost:4200' + this.router.url;
     this.shortenService.getDecodedUrl(url).subscribe((res) => {
-      let originalUrl = res['url_from'];
+      let originalUrl = res['original_url'];
       if (!originalUrl.match('^http(s){0,1}:\/\/')) {
         originalUrl = 'http://' + originalUrl;
       }
