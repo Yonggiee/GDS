@@ -20,12 +20,13 @@ shortenRouter.get('/', async (req, res) => {
             'SELECT selectUrlMapping($1) as url_from;',
             [ base62Encoded ]
         );
-        if(rows.length == 0) {
+        const row = rows[0];
+        if(row['url_from'] == null) {
             return res.status(HTTP_STATUS_CODES.NOT_FOUND).json({
                 err: 'No URL found!'
             });
         }
-        return res.status(200).json(rows[0]);
+        return res.status(200).json(row);
     } catch (err) {
         console.log(err);
         return res.status(HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR).json();
@@ -42,32 +43,50 @@ shortenRouter.post('/', async (req, res) => {
             });
     }
 
-    // change this
-    try {
-        const { rows } = await pool.query(
-            'SELECT insertUrlMapping($1) as url_to;',
-            [originalUrl]
-        );
-        if (!isNaN(rows[0]['url_to'])) {
-            const id = rows[0]['url_to'];
-            const newMapping = shorten(id);
-            await pool.query(
-                'UPDATE url_mapping \
-                    SET url_to = $1  \
-                WHERE id = $2;',
-                [newMapping, id]
+    const client = await pool.connect();
+    for (let i = 0; i < 5; i++) {
+        try {
+            await client.query('BEGIN');
+            const { rows } = await pool.query(
+                'SELECT url_to \
+                    FROM url_mapping \
+                WHERE url_from = $1',
+                [originalUrl]
             );
+            
+            if (rows.length > 0) {
+                client.release();
+                return res.status(HTTP_STATUS_CODES.OK)
+                    .json(rows[0]);
+            } 
+
+            const result = await pool.query(
+                'SELECT inc.n as lowest_id\
+                    FROM generate_series(1, (SELECT COALESCE(MAX(id), 0) FROM url_mapping) + 1) AS inc(n) \
+                WHERE inc.n NOT IN (SELECT id FROM url_mapping);'
+            );
+            const lowestId = result['rows'][0]['lowest_id'];  
+            
+            const newMapping = shorten(lowestId);
+            await client.query(
+                'INSERT INTO url_mapping (id, url_from, url_to) VALUES ($1, $2, $3);',
+                [lowestId, originalUrl, newMapping]
+            );
+            await client.query('COMMIT');
+            client.release();
+    
             return res.status(HTTP_STATUS_CODES.OK)
                 .json({
                     url_to: newMapping
                 });
+        } catch (err) {
+            console.log(err);
+            await client.query('ROLLBACK');
         }
-        return res.status(HTTP_STATUS_CODES.OK)
-                .json(rows[0]);
-    } catch (err) {
-        console.log(err);
-        return res.status(HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR).json();
     }
+
+    client.release();
+    return res.status(HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR).json();
 });
 
 module.exports = shortenRouter;

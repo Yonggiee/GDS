@@ -9,48 +9,22 @@ CREATE TABLE url_mapping (
 
 DROP FUNCTION IF EXISTS selectUrlMapping;
 CREATE OR REPLACE FUNCTION selectUrlMapping(val_url_to VARCHAR)
-RETURNS TABLE (result VARCHAR)
+RETURNS VARCHAR(25)
 LANGUAGE plpgsql
 AS
 $$
+DECLARE
+    ret_url VARCHAR(255);
+
 BEGIN
-    IF EXISTS (SELECT 1 FROM url_mapping WHERE url_to=val_url_to) THEN
+    SELECT url_from INTO ret_url
+        FROM url_mapping
+    WHERE url_to = val_url_to;
+    IF ret_url IS NOT NULL THEN
         UPDATE url_mapping
             SET last_accessed = NOW()
         WHERE url_to = val_url_to;
     END IF;
-	RETURN query
-        SELECT url_from 
-            FROM url_mapping
-        WHERE url_to = val_url_to;
-END;
-$$;
-
-DROP FUNCTION IF EXISTS insertUrlMapping;
-CREATE OR REPLACE FUNCTION insertUrlMapping(val_url_from VARCHAR)
-RETURNS TABLE (result VARCHAR)
-LANGUAGE plpgsql
-AS
-$$
-DECLARE lowest_id INTEGER;
-
-BEGIN
-    IF NOT EXISTS (SELECT 1 FROM url_mapping WHERE url_from=val_url_from) THEN
-        SELECT inc.n INTO lowest_id
-            FROM generate_series(1, (SELECT COALESCE(MAX(id), 0) FROM url_mapping) + 1) AS inc(n) 
-        WHERE inc.n NOT IN (SELECT id FROM url_mapping);
-
-        INSERT INTO url_mapping VALUES (lowest_id, val_url_from, 'Creating URL...');
-        RETURN query 
-            SELECT CAST(lowest_id AS VARCHAR);
-    ELSE
-        UPDATE url_mapping
-            SET last_accessed = NOW()
-        WHERE url_from = val_url_from;
-        RETURN query
-            SELECT url_to 
-                FROM url_mapping
-            WHERE url_from = val_url_from;
-    END IF;
+	RETURN ret_url;
 END;
 $$;
